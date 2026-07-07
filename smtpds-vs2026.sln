@@ -1,0 +1,18 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.0.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "smtpds-vs2026", "smtpds-vs2026.vcxproj", "{A9C2F51D-EB43-4F21-83D3-78138B4B1F87}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Home|x64 = Home|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9C2F51D-EB43-4F21-83D3-78138B4B1F87}.Home|x64.ActiveCfg = Home|x64
+		{A9C2F51D-EB43-4F21-83D3-78138B4B1F87}.Home|x64.Build.0 = Home|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
