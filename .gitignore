@@ -1,0 +1,25 @@
+# Build outputs
+build/
+Debug*/
+Release*/
+x64/
+debugx64/
+release*x64/
+Releasex32/
+Debugx32/
+
+# Visual Studio generated files
+*.ncb
+*.suo
+*.user
+*.opt
+*.plg
+*.ilk
+*.pdb
+*.idb
+*.obj
+*.bsc
+*.map
+
+# Local agent/workspace metadata
+.agents/

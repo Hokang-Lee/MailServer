@@ -1,0 +1,285 @@
+------------------------------------------------------------------------------------------
+SPA SMTP Delivery Agent (The transmission part of SPA SMTP Server)
+------------------------------------------------------------------------------------------
+[Soft name]                 SPA SMTP Delivry Agent
+[Registration The name]     SPADS127.ZIP
+[Copyright The person]      Katuyuki Kawakami (kawa@mps.ne.jp)
+[Carrying The person]       The copyright person and the same
+[Correspondence The model]  Windows NT4.0/Windows 2000
+[Software classification]   SPARS and the free wear to use
+[Reprinting The condition]  Give contact beforehand.
+[Soft explanation]          It is SPA SMTP Reciver and the SMTP transmission part touse.
+                              It is the one for the use which was independent as SPA SMTP
+                              Server by using both to make possible.
+
+- It prohibits the quotation and the reprinting of the contents without the permission. -
+------------------------------------------------------------------------------------------
+[Introduction]
+------------------------------------------------------------------------------------------
+  At present, as the unjust relay measure for EMWAC IMS, it was exhibiting
+  SPARS, but it made about the transmission part in addition to the receiving
+  part, too, and it decided to exhibit it.
+
+  This "SPA SMTP Delivry Agent"(SPADS.exe) has a purpose of handy switchover's
+  becoming possible without changing original service environment with
+  SMTPDS.exe in EMWAC IMS, replacing a difference only, to make keep
+  compatibility as much as possible.
+
+  1. The SPA is SMTP It makes available as the one which was independent as James Grover Thurber, too.
+  2. The improvement during the relay time after the receiving
+  3. The try to the improvement of some of the transmission parts of EMWAC IMS defective points
+
+  [Attention]
+  The purpose of this program is to use with SPARS.
+  Be careful because SPADS (the transmitter ability), too, becomes not able to
+  be used when not putting the cancellation key of SPARS and passing 30 days.
+
+------------------------------------------------------------------------------------------
+[Environment]
+------------------------------------------------------------------------------------------
+The machine that the mail server which used EMWAC IMS Windows NT4.0 since then
+is operating
+Be careful because this program is only for the Intel edition.
+
+------------------------------------------------------------------------------------------
+[File composition]
+------------------------------------------------------------------------------------------
+ The following two files are born in "SPADSxxx.ZIP".
+
+   SPADS.EXE     (Program body)
+   README.TXT   (This file)
+
+------------------------------------------------------------------------------------------
+[Condition of the use]
+------------------------------------------------------------------------------------------
+ 1) We make this software SPARS and the free wear to use.
+ 2) When reprinting this software, we request a mail to the author beforehand.
+ 3) We request to add reverse assembly and reorganization to this software not to be.
+ 4) The author understand a responsibility in the negative or ‚Ë‚Ü‚·‚Ì about
+     the damage which occurs directly or indirectly about the use of this
+     software.
+
+    Unless agreeing to above condition, the use of this software be reserved.
+
+------------------------------------------------------------------------------------------
+[Installation]
+------------------------------------------------------------------------------------------
+To install EMWAC IMS and that sending and receiving is normally made are a
+presupposition.
+
+(Attention before use with WIN2000)
+ Hereinafter, when the value is a blank after confirming a registry, the IP
+ address of DNS James Grover Thurber must be set.
+ "SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\NameServer"
+  Ex. )      DNS1            DNS2
+     123.456.789.012 123.456.789.013
+                    When more than one +-- inputs, it divides by the blank.
+
+1. There is a log in in the ADMINISTRATOR authority.
+
+2. It thaws, it preserves SPADS.ZIP in the preservation folder of EMWAC IMS
+and it adds it to the service.
+    Ex. ) C:>CD imsi386 C:\imsi386>spads-install
+
+3. The mail receiving service " It stops IMS SMTP Delivry Agent".
+    [Control Panel]
+      - > [The service]
+        ->[IMS SMTP Delivry Agent]
+          -> It changes into "stop" & "manual".
+    The above attention ) service must be left beforehand without deleting it.
+
+4. The mail receiving service " It starts SPA SMTP Delivery Agent".
+    [Control Panel]
+      - > [The service]
+        ->[SPA SMTP Delivery Agent]
+          -> It changes into "start" & "automatic".
+
+------------------------------------------------------------------------------------------
+[About the update]
+------------------------------------------------------------------------------------------
+The difference replacement completes if copying a program in the new one about
+the difference replacement by the program after made to be "the service stop"
+and being "the service starting".
+
+There is not re-input of the cancellation key in now basically, being
+necessary.
+
+But, when doing "Anne installation" of the service, there is re-input's
+necessity.
+
+------------------------------------------------------------------------------------------
+[Un Installation]
+------------------------------------------------------------------------------------------
+1. The mail receiving service " It stops SPA SMTP Delivry Agent".
+    [Control Panel]
+      - > [The service]
+        ->[SPA SMTP Delivery Agent]
+          -> It changes into "stop".
+
+2. In the DOS prompt, it moves to the preservation folder of SPADS.EXE and it executes as follows.
+    Ex. ) C:>CD imsi386
+          C:\imsi386>spads-remove
+          C:\imsi386>SPA SMTP Delivery Agent removed.
+          C:\imsi386>
+    Anne installation completed above.
+
+------------------------------------------------------------------------------------------
+[Confirmation of the version]
+------------------------------------------------------------------------------------------
+1. In the DOS prompt, it moves to the preservation folder of SPADS.EXE and it executes as follows.
+    Ex. )
+       C:>CD imsi386
+       C:\imsi386>spads-version
+       C:\imsi386>SPA SMTP Delivry Agent (1.xx) Mon, 06 Sep 1999 12:33:11 +0900 C:\imsi386>
+
+    The version of this program can be confirmed above.
+
+------------------------------------------------------------------------------------------
+[Operation confirmation by the debug mode]
+------------------------------------------------------------------------------------------
+The inquiry of the operation becomes the shortcut of the problem solving when
+tracing out and it is possible to send the following data to the text and so on,
+attaching.
+
+1. In the DOS prompt, it moves to the preservation folder of SPADS.EXE and it executes as follows.
+
+    It is necessary to make service stop beforehand.
+    Ex.) C:>CD imsi386
+         C:\imsi386>spads -debug
+         C:\imsi386>Debugging SPA SMTP Delivery Agent. 
+         ---- regestry ----
+         Timer            1200
+         Trace Mode       off
+         Smtp Port        25
+         MailGroup        "IMSUsers"
+         LocalDomain List "xxxx.co.jp"
+         Carbon Copy List
+         MailInMaxSize    0
+         MailInBoxSize    0 
+         LastMsgId        0000001419
+         MailQueueDir     incoming\
+         MailSpoolDir     E:\IMS\
+         Program Path     E:\imsi386\
+         AcceptLog        on
+         -------------------
+       SPA SMTP Delivery Agent (1.xx) Fri, 11 Feb 2000 13:30:32 +0900
+       windows 4.0 Build 1381 (Service Pack 6)
+       Intel 1 processor in the system.
+
+    It is beforehand as above, it traces out mail receiving operation and it is possible to do confirmation.
+    When preserving a trace at the text
+
+    C:\imsi386>spads -debug > log.txt
+    Make an optional text trace out using , the pipe.
+
+    When stopping, it stops at [CTRL-C].
+
+------------------------------------------------------------------------------------------
+[Others]
+------------------------------------------------------------------------------------------
+We request an opinion and so on in E-mail:kawa@mps.ne.jp (katuyuki kawakami).
+Also, it plans to do an up-to-the-minute information in "http://www.mps.ne.jp/personal/kawa/".
+
+------------------------------------------------------------------------------------------
+[Change record]
+------------------------------------------------------------------------------------------
+v1.00 2000.05.08 It releases as the spads.exe test edition.
+
+v1.01 2000.05.09 The defect to lock when a domain isn't stored in the transmission place address
+
+v1.02 2000.05.18 When making an account name @ machine name. domain name by the transmission to the local user
+                 The defect to interpret as another domain and a transmission retry for there to have been forever
+
+v1.03 2000.05.21 The defect where the mailbox folder of the local user can not be automatically made
+                 In the addressable of the end of the gateway of the relay mail
+
+v1.04 2000.05.31 When it is possible for 1.IMS to use non-installation
+                 2. The defect which sometimes can not be relayed to the outside
+                   domain when DNS Server uses with the machine when it is installed
+                 3. The defect which can not be answered that it does the return
+                 mail of the address obscurity
+
+v1.05 2000.06.08 1. The defect where the contribution of the mailing list is refused
+                 2. The closing forgetting of SOCKET handle
+
+v1.06 2000.06.08 1. The defect which has looped eternally when DNS of the object domain isn't found out
+
+v1.07 2000.06.14 1. The defect which isn't done in the replying wait time-out
+                 2. "postmaster" and the displayed defect by the header of (TO:) of the place
+                 of the transmission of the answer mail at the time of the error
+
+v1.08 2000.06.15 1. Making an error in the transmission to direct when some circuit is abnormal and is cut at 
+                    the time of the data communication to the transmission place 
+                    The defect which had returned a message to the transmission origin (It made the style where there is a retry.)
+                 2. The defect which the last line has sometimes overlapped when adding AUTORPLAY.TXT by the automatic answering
+
+v1.09 2000.06.17 1. When it is possible to use %HOME% variable to the mailbox folder
+                 2. It changes the default of the work folder into "%SystemRoot%\SYSTEM32\SPA\MAIL".
+                 3. It changes the default of the mailbox folder into "%HOME%\INETMAIL\INBOX".
+                 4. It changes the default of the manager address into "Administrator".
+
+v1.10 2000.06.22 1. The defect which isn't replaced with the default when the setting of a work folder, a mailbox folder, a manager address is a blank
+                 2. The defect where the contents of NOREPLY.TXT don't become effective with the automatic answering
+
+v1.11 2000.06.24 The defect where there is possibility of the memory leak in 1.MX record acquisition
+                 2. In mailing list user registration The defect which becomes that it isn't possible to assume as the user
+                    when tying up with the brackets to the business of "<xxx@xxx.co.jp>"
+
+v1.12 2000.07.03 The defect which can not do a delivery to the local domain when there is not A record to domain in the description of 1.DNS
+
+v1.13 2000.07.04 1. The defect which sometimes becomes delaying in delivery with the other mail becoming a delivery wait until mailing list delivery completion
+                 1. The defect which has been registered as the mail address which included a blank, too, when there were
+                   equal to or more than two blanks at the head of the mail address which was specified by the enrollment
+                   control and the withdrawal control to the mailing list
+
+v1.14 2000.07.13 1. Of SMTP James Grover Thurber of not examining MX record if it is possible to pull a machine directly by the domain after "@" of the mail address
+                   It changes as it makes interpret.
+                 2. It adds the flag of "DeleteHeader" to IMS.CTL of the automatic answering.
+
+v1.15 2000.07.13 The defect where the mail address which was speci fied by the description "ReplyFrom" of 1.IMS.CTL isn't replaced
+
+v1.16 2000.07.23 Under the 1.NAT environment, and so on, the local IP and the global IP are allocated for the object machine and are the one of the local IP.
+                   The defect where the local IP can not be delivered to the mailbox in case of network setting with
+                   priority under the environment setting which can not do an address draw
+                 2. It corrects as the SMTP server which it is possible to draw directly by the domain it is drawn up and
+                   doesn't make a transmission error immediately when refusing a relay, described in the MX record and the
+                   reexecuting to SMTP of the different ‚½‚Ì making.
+
+v1.17 2000.07.28 1. The defect where " blank + message " makes a hang the rear of the replying code of companion James Grover Thurber in case of not being by the transmission procedure
+                 2. The defect where the specification of the local address which was assigned by the alias setting than                  spacontrol.exe isn't done right
+                 3. When it is possible to enter mailing list control command "JOIN(SUBSCRIBE) and LEAVE(UNSUBSCRIBE)" in this passage only and for a list to be registered and to delete an object mail
+                 4. The defect where there is possibility that there is a hang when issuing mailing list control command "LEAVE(UNSUBSCRIBE)"
+
+v1.18 2000.08.04 1. The defect where there is possibility that there is a hang when doing the address of the mechanical name in the existing domain which doesn't exist
+                 2. The defect where there is a hang when the mail transmission contents transmit the mail which exceeded 256-byte 1 line
+                 3. The defect which can not be delivered when an alias name is assigned to the inner domain by the mailing list user
+                 4. The defect where a mail address isn't displayed in the request message of the on withdrawal from the mailing list
+                 5. The defect where the transmission person address can not process an error mail right to the mail in the blank
+
+v1.19 2000.08.05 1. The alias setting : * The defect which is delivered to abc-abc-* without being delivered to abc-* when making @abc.co.jp-> abc-*@abc.co.jp
+
+v1.20 2000.08.10 The checking measure by 1.MAPS RSS (The side of spars)
+                    It is related correction about the change as it makes default invalid about the virtual account for the manager who is called "postmaster".
+                 1. The defect which can not be delivered to the mailbox according to the account when there is not %home% or environment variable %username% specification in the specification of the mailbox folder
+
+v1.21 2000.08.18 The defect which the mail which is identical when 1.From forwards a mail in the blank in IMS.CTL has been delivered to more than one time
+                 2. The defect where the mail contents 2nd since then become blank when there is one which the account to have registered on the mailing list specified in the forwarding by IMS.CTL
+                 3. The defect where an error mail then in the manager account @ domain, isn't delivered to the manager account column
+
+v1.22 2000.08.22 1. When it is possible to transmit by the multi-thread
+                 2. When it is possible to choose a transmission by each multi- single thread as the safety
+
+v1.23 2000.08.25 1. The defect which an identical mail is of more than one repeatedly transmitted to when transmitting by the mailing list and so on by the multi-thread
+                 2. The defect where the replying data from the SMTP server which tried to connect loops infinitely with the receiving order at the time of 0 bytes
+                 3. The defect which has been refused in the forwarding when specifying in the forwarding to the outside account in IMS.CTL
+
+v1.24 2000.08.30 1. To the SMTP server of the following priority when it is impossible to connect to object SMTP in the case with plural in the MX record in the transmission place
+                   It changes as the trying of a connection.
+
+v1.25 2000.09.13 1. Increasing the retry number of times to refer to the un-detected MX record
+                 The defect which has used a changed folder except the "incoming" folder when 2."MailQueueDir" registry is changed
+
+v1.26 2000.09.25 1. The defect which is suspended by incoming in the retry result noose by the replying wait when the replying from the companion SMTP server stops in the transmission procedure
+
+v1.27 2000.10.15 1. The defect which an empty mail is delivered to by the timing by the setting by the multi-thread
+------------------------------------------------------------------------------------------
