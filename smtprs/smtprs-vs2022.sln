@@ -1,0 +1,18 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "smtprs-vs2022", "smtprs-vs2022.vcxproj", "{56D079A5-D652-4809-A9C9-B2FBE6E6897C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Home|x64 = Home|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56D079A5-D652-4809-A9C9-B2FBE6E6897C}.Home|x64.ActiveCfg = Home|x64
+		{56D079A5-D652-4809-A9C9-B2FBE6E6897C}.Home|x64.Build.0 = Home|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

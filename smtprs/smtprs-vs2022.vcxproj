@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Home|x64">
+      <Configuration>Home</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{56D079A5-D652-4809-A9C9-B2FBE6E6897C}</ProjectGuid>
+    <RootNamespace>smtprs</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Home|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Home|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Home|x64'">
+    <OutDir>$(ProjectDir)build\bin\</OutDir>
+    <IntDir>$(ProjectDir)build\obj\vs2022\$(Configuration)\$(Platform)\</IntDir>
+    <TargetName>epstrs-home-x64</TargetName>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Home|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>.;..\compat;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>objbase.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PreprocessorDefinitions>WIN64;WIN32;_CONSOLE;_MT;WINDOWS;MULTI_ML;BTHREAD;HOME_VERSION;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>res\smtprs.RES;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;wsock32.lib;netapi32.lib;ws2_32.lib;wldap32.lib;dnsapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="auth.c" />
+    <ClCompile Include="aton.c" />
+    <ClCompile Include="bad.c" />
+    <ClCompile Include="base64.c" />
+    <ClCompile Include="ccopy.c" />
+    <ClCompile Include="Cluster.c" />
+    <ClCompile Include="data.c" />
+    <ClCompile Include="dot.c" />
+    <ClCompile Include="effect.c" />
+    <ClCompile Include="ehlo.c" />
+    <ClCompile Include="expn.c" />
+    <ClCompile Include="filter.c" />
+    <ClCompile Include="header.c" />
+    <ClCompile Include="helo.c" />
+    <ClCompile Include="help.c" />
+    <ClCompile Include="ldap.c" />
+    <ClCompile Include="mail.c" />
+    <ClCompile Include="md5c.c" />
+    <ClCompile Include="milter.c" />
+    <ClCompile Include="mime_chk.c" />
+    <ClCompile Include="noop.c" />
+    <ClCompile Include="ntoa.c" />
+    <ClCompile Include="ordb.c" />
+    <ClCompile Include="pass.c" />
+    <ClCompile Include="profile.c" />
+    <ClCompile Include="QuickCV.c" />
+    <ClCompile Include="quit.c" />
+    <ClCompile Include="Quoted.c" />
+    <ClCompile Include="rcpt.c" />
+    <ClCompile Include="Reg2File.c" />
+    <ClCompile Include="regist.c" />
+    <ClCompile Include="rset.c" />
+    <ClCompile Include="service.c" />
+    <ClCompile Include="smtprs.c" />
+    <ClCompile Include="socket.c" />
+    <ClCompile Include="spamx.c" />
+    <ClCompile Include="stls.c" />
+    <ClCompile Include="Thirdparty.c" />
+    <ClCompile Include="threads.c" />
+    <ClCompile Include="user_manager.c" />
+    <ClCompile Include="userlist.c" />
+    <ClCompile Include="utf7.cpp" />
+    <ClCompile Include="utf8.cpp" />
+    <ClCompile Include="vrfy.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="codepage.h" />
+    <ClInclude Include="global.h" />
+    <ClInclude Include="md5.h" />
+    <ClInclude Include="md5c.h" />
+    <ClInclude Include="profile.h" />
+    <ClInclude Include="QuickCV.h" />
+    <ClInclude Include="res\smtprs.h" />
+    <ClInclude Include="service.h" />
+    <ClInclude Include="smtp.h" />
+    <ClInclude Include="smtptype.h" />
+    <ClInclude Include="utf7.h" />
+    <ClInclude Include="utf8.h" />
+    <ClInclude Include="version.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="build-home-x64.cmd" />
+    <None Include="readme.spars.txt" />
+    <None Include="redame-en.spars.txt" />
+    <None Include="res\MSG00409.bin" />
+    <None Include="res\smtprs.mc" />
+    <None Include="res\smtprs.rc" />
+    <None Include="res\smtprs.RES" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

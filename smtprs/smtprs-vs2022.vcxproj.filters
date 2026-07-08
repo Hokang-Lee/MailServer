@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>c;cpp</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;mc;res;bin</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="auth.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="aton.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="bad.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="base64.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="ccopy.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="Cluster.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="data.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="dot.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="effect.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="ehlo.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="expn.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="filter.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="header.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="helo.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="help.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="ldap.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="mail.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="md5c.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="milter.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="mime_chk.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="noop.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="ntoa.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="ordb.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="pass.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="profile.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="QuickCV.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="quit.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="Quoted.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="rcpt.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="Reg2File.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="regist.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="rset.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="service.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="smtprs.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="socket.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="spamx.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="stls.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="Thirdparty.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="threads.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="user_manager.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="userlist.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="utf7.cpp"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="utf8.cpp"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="vrfy.c"><Filter>Source Files</Filter></ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="codepage.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="global.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="md5.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="md5c.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="profile.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="QuickCV.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="service.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="smtp.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="smtptype.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="utf7.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="utf8.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="version.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="res\smtprs.h"><Filter>Resource Files</Filter></ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="build-home-x64.cmd" />
+    <None Include="readme.spars.txt" />
+    <None Include="redame-en.spars.txt" />
+    <None Include="res\MSG00409.bin"><Filter>Resource Files</Filter></None>
+    <None Include="res\smtprs.mc"><Filter>Resource Files</Filter></None>
+    <None Include="res\smtprs.rc"><Filter>Resource Files</Filter></None>
+    <None Include="res\smtprs.RES"><Filter>Resource Files</Filter></None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,608 @@
+------------------------------------------------------------------------------------------
+SPA SMTP Receiver (The unjust relay measure receiver of EMWAC IMS SMTP Receiver)
+------------------------------------------------------------------------------------------
+[Soft name]                SPA SMTP Receiver
+[Registration The name]    SPARS134.ZIP
+[Copyright The person]     Katuyuki Kawakami(kawa@mps.ne.jp)
+[Carrying The person]      The copyright person and the same
+[Correspondence The model] Windows NT4.0/Windows 2000
+[Software classification]  The shareware
+[Reprinting The condition] Give contact beforehand.
+[Soft explanation]         It is the SMTP receiver to impose restrictions on the
+                             unjust mail relay in EMWAC IMS (the mail service).
+                             SMTPRS(0.83) It limits a relay by replacing a difference.
+
+- It prohibits the quotation and the reprinting of the contents without the permission. -
+
+------------------------------------------------------------------------------------------
+[Introduction]
+------------------------------------------------------------------------------------------
+  EMWAC IMS was the free mail service program which works on NT, but the number
+  of the users, too, can do the mail service which was stable with the simple
+  setting without the limiting and it was convenient for it terribly.
+
+  Also, only the unjust relay measure to be the service program which is called
+  SCSMFILTER because limiting to the unjust relay isn't hung, and to check a
+  mail after the receiving and a filter ring for there to be had a means.
+
+  However, it isn't possible to refuse the receiving procedure immediately 
+  SCSMFILTER has imposed a burden to the circuit and the mail server.
+  Also, because the function extension work of EMWAC IMS was already stopped, 
+  persistently individually, it made the SMTP receiving part which the limiting 
+  to the unjust relay made be hung now and regrettably, because stopped, 
+  it decided to exhibit it.
+
+  This "SPA SMTP Receiver"(SPARS.exe) make keep compatibility as much as
+  possible with SMTPRS.exe(0.83) in EMWAC IMS, replaces a difference only and
+  extends a function below in the addition.
+
+  1. The addition of the limiting function of the relay
+  2. The extension of the alias function
+  3. The extension of the mailing list function
+  4. The extension of the log function
+  5. The relay restraint of the secondary infection mail of the virus
+
+  [Attention]
+  We are exhibiting this program as the shareware.
+  In the trial period of this version, it installs and it is 30 days from the first starting.
+  It doesn't put a cancellation key and receiver ability itself stops 30 days when passing.
+
+  Refer to the form below - > [about the way of remitting and the cancellation key].
+------------------------------------------------------------------------------------------
+[Environment]
+------------------------------------------------------------------------------------------
+The machine that the mail server which used EMWAC IMS Windows NT4.0 SP4 since then is 
+operating be careful because this program is only for the Intel edition.
+
+------------------------------------------------------------------------------------------
+[File composition]
+------------------------------------------------------------------------------------------
+ The following four files are born in "SPARSxxx.ZIP".
+
+   SPARS.EXE     (Smtp Reciver Program)
+   EFFECT.DAT    (IP address list not to check in the unjust relay)
+   VIRUS.DAT     (Characteristic data for the secondary infection restraint of the virus and so on)
+   README.TXT    (This file)
+
+------------------------------------------------------------------------------------------
+[Condition of the use]
+------------------------------------------------------------------------------------------
+ 1) We make this software a shareware.
+ 2) When reprinting this software, we request a mail to the author beforehand.
+ 3) We request to add reverse assembly and reorganization to this software not to be.
+ 4) The author doesn't bear responsibility about the damage which occurs directly 
+    or indirectly about the use of this software.
+
+    Unless agreeing to above condition, the use of this software be reserved.
+
+------------------------------------------------------------------------------------------
+[About the way of remitting and the cancellation key]
+------------------------------------------------------------------------------------------
+We make this program 30 days behind the installation in the trial period.
+In case of use its since then, remit $50 until the following directing.
+Also, when installing SPARS in more than one machine and using it, remit an
+amount of money with $50 Å~ [the number of the stands to install SPARS in].
+Only incidentally, remit the bank about the method of payment
+
+-------------------------------------------------------------------------
+1) The remittance place
+    We ask the following account for the remittance.
+    Sumitomo Bank    Kasukabe (Floor walker No. 903)
+    account number   607887
+    account kind     The ordinary deposit
+    account name     access representative katuyuki kawakami
+
+* Report the effect which transferred after remittance with the mail for I (kawa@mps.ne.jp).
+  Also, always write the following at the mail.
+
+  (1) The soft name : SPARS
+  (2) The quantity
+  (3) The remitter name (The name which was written in the place of the remitter name in bank remittance)
+  (4) The answer place E-mail address
+  (5) The remittance date
+
+It sends a cancellation key with the mail as soon as it is possible to confirm
+that it was remitted.
+
+-------------------------------------------------------------------------
+[Way of registering a cancellation key]
+-------------------------------------------------------------------------
+1. In the DOS prompt, it moves to the preservation folder of SPARS.EXE and it executes as follows.
+    It is as SPARS is working and it is possible to register.
+    Ex. ) C:>CD imsi386 It inputs C:\imsi386>spars, key <the cancellation key
+       value> <-this place.
+       C:\imsi386>It succeeded.           <-the replying returns when registered.
+    A cancellation key was registered above.
+
+-------------------------------------------------------------------------
+[Installation]
+-------------------------------------------------------------------------
+To install EMWAC IMS and that sending and receiving is normally made are a
+presupposition.
+
+1. There is a log in in the ADMINISTRATOR authority.
+
+2. It thaws, it preserves SPARS.ZIP in the preservation folder of EMWAC IMS and it adds it to the service.
+    Ex. )C:>CD imsi386
+         C:\imsi386>spars-install
+
+3. The mail receiving service It stops "IMS SMTP Receiver".
+    [Control Panel]
+      -> [service]
+        ->[IMS SMTP Receiver]
+          -> It changes into "stop" & "manual".
+    attention ) service must be left beforehand without deleting it.
+   +---------------------------------------------------------------------------------+
+   | When specifying a thing except "IMSUsers" in the local group of the mail user   |
+   |"HKEY_LOCAL_MACHINE\SOFTWARE\EMWAC\IMS\\MailGroup" (REG_SZ):<default "IMSUsers"> |
+   | It adds in registry-editor and it specifies the local group which is set as the |
+   | mail user.                                                                      | 
+   +---------------------------------------------------------------------------------+
+   +--------------------------------------------------------------------+
+   | When changing setting from behind, "SPARS" must be re-started.     |
+   +--------------------------------------------------------------------+
+
+4. The setting & confirmation of the one's own domain
+    [Control Panel]
+       ->[EMWAC IMS]
+           ->[Misc]
+             ->[Accept Mail For:] It sets. The one's own domain to be operating here (xxx.com)
+
+5. The mail receiving service It starts  "SPA SMTP Receiver".
+    [Control Panel]
+      ->[The service]
+        ->[SPA SMTP Receiver]
+          -> It changes into "start" & "automatic".
+
+6. To confirm operation, in Telenet, connect with SPARS as follows and attempt to confirm.
+
+    telnet <mail server> smtp<cr>                 <---- It inputs this place.
+    ------------------------------------------
+    S:220 xxx.xxxx.co.jp SPA SMTP Receiver (1.xx) Fri, 04 Feb 2000 07:17:13
+    +0900
+    C:VRFY <username>@<domain><cr>                <---- It inputs this place.
+    S:250 <username>@<domain> ... User ok
+    Or
+    S:550 <username>@<domain> ... User unknown.
+    ------------------------------------------
+
+   As mentioned above, it becomes ready for receiving ability because SPARS
+   admits as the inner domain user if striking the optional inner user name by
+   the VRFY command and James Grover Thurber returns "User ok".
+   " If User unknown" comes out, there is possibility that a local group isn't
+   set right.
+
+-------------------------------------------------------------------------
+[About the update]
+-------------------------------------------------------------------------
+The difference replacement completes if copying a program in the new one about
+the difference replacement by the program after made to be "the service stop"
+and being "the service starting".
+
+There is not re-input of the cancellation key in now basically, being necessary.
+
+But, when doing "Anne installation" of the service, there is re-input's necessity.
+
+-------------------------------------------------------------------------
+[uninstallation]
+-------------------------------------------------------------------------
+1. The mail receiving service " It stops SPA SMTP Receiver".
+    [Control Panel]
+      -> [The service]
+        ->[SPA SMTP Receiver]
+          -> It changes into "stop".
+
+2. In the DOS prompt, it moves to the preservation folder of SPARS.EXE and it executes as follows.
+    Ex. )C:>CD imsi386
+         C:\imsi386>spars-remove
+         C:\imsi386>SPA SMTP Receive removed.
+         C:\imsi386>
+    Anne installation completed above.
+
+-------------------------------------------------------------------------
+[Confirmation of the version]
+-------------------------------------------------------------------------
+1. In the DOS prompt, it moves to the preservation folder of SPARS.EXE and it executes as follows.
+    Ex. ) C:>CD imsi386
+          C:\imsi386>spars-version
+          C:\imsi386>SPA SMTP Receiver (1.xx) Mon, 06 Sep 1999 12:33:11 +0900
+          C:\imsi386>
+    The version of this program can be confirmed above.
+
+-------------------------------------------------------------------------
+[Operation confirmation by the debug mode]
+-------------------------------------------------------------------------
+The inquiry of the operation becomes the shortcut of the problem solving when
+tracing out and it is possible to send the following data to the text and so
+on, attaching.
+(Use v1.11 since then.)
+
+1. In the DOS prompt, it moves to the preservation folder of SPARS.EXE and it executes as follows.
+    It is necessary to make service stop beforehand.
+    Ex. ÅjC:>CD imsi386
+          C:\imsi386>spars -debug Debugging SPA SMTP Receiver.
+
+       ---- regestry ---- 
+       Timer            1200
+       Trace Mode       off
+       Smtp Port        25
+       MailGroup        "IMSUsers"
+       LocalDomain List "xxxx.com"
+       Carbon Copy List 
+       MailInMaxSize     0
+       MailInBoxSize     0
+       LastMsgId         0000001419
+       MailQueueDir      incoming\
+       MailSpoolDir      E:\IMS\
+       Program Path      E:\imsi386\
+       AcceptLog         on
+       -------------------
+       SPA SMTP Receiver (1.11) Fri, 11 Feb 2000 13:30:32 +0900
+       windows 4.0 Build 1381 (Service Pack 6)
+       Intel 1 processor in the system.
+
+    It is beforehand as above, it traces out mail receiving operation and it is
+    possible to do confirmation.
+    When preserving a trace at the text
+
+    C:\imsi386>spars -debug > log.txt
+
+    Make an optional text trace out using , the pipe.
+
+    When stopping, it stops at [CTRL-C].
+
+-------------------------------------------------------------------------
+[1. The addition of the limiting function of the relay]
+-------------------------------------------------------------------------
+  [SPARS The limiting of a relay : Åõ Relay possible /Å~ relay's being impossible]
+            +----------------------+-------------------------------+
+            |                      |           Recpient            |
+            |                      +--------------+----------------+
+            |                      | inner domain | outside domain |
+            +------+---------------+--------------+----------------+
+            |      |inner domain   |      Åõ      |       Åõ       |
+            | From +---------------+--------------+----------------+
+            |      |outside domain |      Åõ      |       Å~       |
+            +------+---------------+--------------+----------------+
+
+1. Even if the transmission origin, transmission place is the inner domain, it
+  refuses a mail relay to the user who doesn't belong to local groups
+  "IMSUsers", "Lists", "Aliases".
+
+2.[Accept Mail For:] is an undefined, it refuses all mail relays.
+
+* The inner domain in this place
+  [Control Panel] - The domain name which is managed in the mail server which
+  was defined by the item of >[EMWAC IMS]->[Misc]->[Accept Mail For:] is shown.
+
+* The outside domain in this place
+  [Control Panel] - The domain name which is relayed outside which was defined
+  by the item of >[EMWAC IMS]->[Misc]->[Accept Mail For:] à»äO is shown.
+
+* When wanting to permit a relay from the specific IP address (the outside domain)
+ It edits the "effect.dat" file which was prepared under the SPA execution
+ folder with the memo book and so on and it sets it in the permission about the
+ transmission from the specific IP address.
+ (For the details, refer to the "effect.dat" file.)
+
+* When wanting to refuse in the receiving from the specific IP address
+ It edits the "effect.dat" file which was prepared under the SPA execution
+ folder with the memo book and so on and it sets it in the refusal about the
+ transmission from the specific IP address.
+ (For the details, refer to the "effect.dat" file.)
+
+* When wanting to limit a maximum size in case of the mail receiving
+  "HKEY_LOCAL_MACHINE\SOFTWARE\EMWAC\IMS\MailInMaxSize"(DWORD) <default 0> :
+  It isn't limited (Not limiting a size in case of 0).
+  Attention ) registry must add in registry-editor when it wants to set.
+              When changing setting, "SPARS" must be re-started.
+
+* When wanting to limit the maximum safekeeping size of the mailbox
+  "HKEY_LOCAL_MACHINE\SOFTWARE\EMWAC\IMS\MailInBoxSize"(DWORD) <default 0> :
+   It isn't limited (Not limiting a size in case of 0).
+   Attention ) This registre must add in registre-editor when it wants to set.
+               Incidentally, it is effective only when using " <the absolute pass>
+               \%USERNAME%" for the setting of [MailBox Directory].
+               When changing setting, "SPARS" must be re-started.
+
+* When wanting to allocate only a specific domain for the specific account in more than one domain use
+  All mail accounts have been generally accepted by all domains when setting mail
+  group (IMSUSers) only and setting more than one domain.
+
+  When wanting to accept only by the specific domain every account
+
+  1. It is [making a local domain] in [each domain name] to the domain user manager.
+  2. It is[It allocates a made local domain for each count]It allocates a made local domain for each count.
+     Now, set mail group (IMSUSers), too, together beforehand.
+
+  Ex. ) Of [abc.co.jp] by the domain to be using [def.co.jp] It is.
+        [Account abc-info] When wanting to accept only in, [abc.co.jp]
+
+      a) It makes a local group by the name, [abc.co.jp], by [the domain user manager].
+      b) It chooses [the account abc-info] by [the domain user manager] It sets to [the belonging group] in the addition.
+         In this, a reception desk by abc-info@def.co.jp is refused.
+
+-------------------------------------------------------------------------
+[2. The extension of the alias function]
+-------------------------------------------------------------------------
+SPARS is doing the following function extension in the alias.
+
+a) It corresponds to more than one domain by the setting of an alias.
+  In setting of [a Control Panel]->[EMWAC IMS]->[Aliases] when for example, want to
+  make it be possible to receive by the account of info and support by both domains
+  when operating in the intermingled environment (abc.co.jp, def.co.jp, and so on,)
+  of more than one domain
+
+   User name:"info@abc.co.jp" -> Map to:"abc-info@abc.co.jp"
+   User name:"info@def.co.jp" -> Map to:"def-info@def.co.jp"
+
+  By setting
+
+   To "def-info@def.co.jp" of the mail that the mail which reached "info@abc.co.jp"
+   directing reached "info@def.co.jp" directing to "abc-info@abc.co.jp"
+
+  It is delivered respectively.
+
+  Also, the definition which uses a wildcard (the asterisk), too, is possible.
+
+   User name:"*@abc.co.jp" -> Map to:"abc-postmaster@abc.co.jp"
+
+  The mail of the domain abc.co.jp directing is sent to "abc-postmaster@abc.co.jp".
+
+   Incidentally, in SPARS, alias setting without the domain has been refused in the relay.
+   Ex. )
+     Å~ User name:"info"           -> Map to:"abc-info"
+     Å~ User name:"info"           -> Map to:"abc-info@abc.co.jp"
+     Å~ User name:"info@abc.co.jp" -> Map to:"abc-info"
+     Åõ User name:"info@abc.co.jp" -> Map to:"abc-info@abc.co.jp"
+   Make input to the alias setting of SPRAS which is registered for before introduction including
+   the domain name.
+
+-------------------------------------------------------------------------
+[3. The extension of the mailing list function]
+-------------------------------------------------------------------------
+SPARS is doing the following function extension in the mailing list.
+
+a) It is the addition of the "Reply-To:" header in case of the receiving by the mailing list address.
+
+b) The addition of the setting to add a title and a ream turn to the mailing list
+  To add a title and a ream turn, every time it does new mailing list making, it is necessary to
+  add in the setting in registry-editor.
+  [New registry to have added to the mailing list processing] The reference
+
+-------------------------------------------------------------------------
+[New registry to have added to the mailing list processing]
+-------------------------------------------------------------------------
+[1] The mailing list counter (REG_DWORD):<default 0>
+    "HKEY_LOCAL_MACHINE\SOFTWARE\EMWAC\IMS\\Lists\<Mailing lists name>\MlId"
+    It counts the number of times which was contributed to the corresponding mailing list.
+
+    This registry is automatically made when a mail is transmitted to this mailing list. (Original
+    value 0)
+
+    When wanting to begin at the specific number, add to registry by the direct handwork and set
+    a number. (The number of it is counted from.)
+
+
+[2] The name & count addition to the mailing list contribution title (REG_SZ) : <default Blank>
+    Adding the number of the counts which is shown in the name and [1] which is peculiar to the
+    list in the title (Subject) which was contributed to the mailing list which
+    "HKEY_LOCAL_MACHINE\SOFTWARE\EMWAC\IMS\\Lists\<Mailing lists name>\MlToken" corresponds to
+
+    It expresses the specification of the number of the counts at "%0 <the number of the count figures>d".
+
+    Attention ) registry must add to the degree of the new mailing list making in registry-editor.
+
+    Ex. 1) "(test %03d)" subject : (test 001) It is replaced with the contributed title and it
+           repeats that the (000-999) count rises in order.
+
+    Ex. 2) "(test %04d)" subject : (test 0001) It is replaced with the contributed title and it
+           repeats that the (0000-9999) count rises in order.
+
+    Ex. 3) "(test %05d)" subject : (test 00001) It is replaced with the contributed title and it
+           repeats that the (00000-99999) count rises in order.
+
+[3] The existence or non-existence of the addition of Reply-To : (REG_DWORD):<default 1>
+    "HKEY_LOCAL_MACHINE\SOFTWARE\EMWAC\IMS\\Lists\<Mailing lists name>\ReplyTo"
+    It is Reply-To at the contribution mail to the corresponding mailing list : It specifies
+    whether or not to add a header.
+    It adds : 1 It doesn't add : 0.
+
+-------------------------------------------------------------------------
+[4. The extension of the log function]
+-------------------------------------------------------------------------
+SPARS is doing the following function extension to log.
+
+a) The copy forwarding of a receiving mail
+  It forwards to the different account which specified a received mail in the copy and it leaves
+  as the log.
+
+  "HKEY_LOCAL_MACHINE\SOFTWARE\EMWAC\IMS\MailInCopy"(BINARY) <default NULL> : It doesn't forward
+   in the copy (Not forwarding in the copy in case of NULL).
+
+    This attention ) registry must add in registry-editor when it wants to set.
+         When changing setting, "SPARS" must be re-started.
+  The copy destination address to this registry be able do more than one piece of registration
+  but the end of each address and of it lastly, insert '0x00'(NULL) in it.
+
+  Ex. 1) When forwarding to abc@abc.co.jp, bcd@bcd.co.jp in the copy
+  Binary: 616263406162632E636F2E6A7000626364406263642E636F2E6A7000
+           a b c @ a b c . c o . j p^^ b c d @ b c d . c o . j p^^
+                                   (NULL)                      (NULL)
+
+b) The log of the IP address which tried a transmission
+  It leaves James Grover Thurber which connected with SPARS and tried execution ÇÇ until it was
+  "MAIL FROM:" command and all IP addresses of the client as the log.
+  Log is made in the folder, "acceptlog" under [Mail Spool Directry].
+  "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SPARS\AcceptlogEnabled"(REG_DWORD):<default 0>
+   (0 : Not leaving log 1 : Leaving log)
+
+    This attention ) registry must add in registry-editor when it wants to set.
+         When changing setting, "SPARS" must be re-started.
+
+-------------------------------------------------------------------------
+[5. The relay restraint of the secondary infection mail of the virus]
+-------------------------------------------------------------------------
+The virus of some species includes a great deal of ones which emit a virus mail automatically from the
+infecting machine.
+(Secondary infection)
+This function "is a try" to the restraint of the relay of this automatically transmitted mail.
+
+Attention )
+* As for this function, it doesn't remove an already infecting virus.
+  Also, it isn't confirmed because it doesn't have a genuine virus mail.
+
+a) The relay restraint of the secondary infection mail of the virus
+  It judges whether or not it is a virus mail for the secondary infection according to the setting of
+  "virus.dat" which was prepared by the SPARS execution folder and it implements the following
+  correspondence.
+  It is possible to edit "virus.dat" with the memo book.
+  It is possible to add if there are ones such as the groundless rumor mail to want to restrain.
+
+  1. The existence or non-existence of the backup of the mail
+     The backup of the virus mail of the secondary infection is made in the folder, "viruslog" under
+     [Mail Spool Directry].
+
+  2. The refusal or the attachment of the warning message
+
+  To make this function effective, it is necessary to add following ÉåÉWÉXÉgÉä.
+  "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SPARS\VirusCheck"(REG_DWORD):<default 0> (0 :
+   Not restraining in the relay 1 : Restraining in the relay)
+
+    This attention ) registry must add in registry-editor when it wants to set.
+         When changing setting, "SPARS" must be re-started.
+
+  The information about the virus for the restraint of "virus.dat" which was prepared with the default
+  consulted information at "the virus measure school" of "IPA".
+  For details, look at "http://www.ipa.go.jp/SECURITY/y2k/virus/cdrom/index.html".
+
+-------------------------------------------------------------------------
+[Others]
+-------------------------------------------------------------------------
+We request an opinion and so on in E-mail:kawa@mps.ne.jp (katuyuki kawakami).
+Also, it plans to do an up-to-the-minute information in "http://www.mps.ne.jp/personal/kawa/".
+
+-------------------------------------------------------------------------
+[Change record]
+-------------------------------------------------------------------------
+v1.00 1999.09.21 It releases as spars.exe.
+
+v1.01 1999.12.18 The defect correction that there is a hang by more than one receiving processing
+
+v1.02 1999.12.25 1. The defect to have made pass when specified by the transmission person as <the inner user @ domain which doesn't exist>
+                 2. The replying processing of VRFY command
+                 2. The defect not to have interpreted "*" of the mail address that an alias was specified
+                 3. It is the IP address setting article addition of the receiving refusal in effect.dat.
+
+v1.03 1999.12.29 The defect which can not be recognized as the existing user when more than one local group to the user is set
+
+v1.04 2000.01.03 1. Being the addition of the "Reply-To:" header in case of the receiving by the mailing list address
+                 2. The addition of the setting to add a title and a ream turn to the mailing list
+                 3. The defect not to be been in the êU division result in in the thing except the inner domain that
+                 an alias is done by when specified
+
+v1.05 2000.01.07 1. The modification of the inner user judgement processing
+
+v1.06 2000.01.12 1. The defect where the mail of the Postmaster directing from outside can not be relayed
+
+v1.07 2000.01.16 1. When it is possible for the alias function to correspond to more than one domain
+                 2. When it is possible to limit a maximum size in case of the mail receiving
+                 3. When it is possible to limit the maximum safekeeping size of the mailbox
+                 4. When the copy forwarding of a receiving mail as the log function is possible
+
+v1.08 2000.01.20 1. The modification of the data receiving ending judgement processing
+
+v1.09 2000.01.26 1. When it is possible to make automatically in case of the service starting in each work folder
+                 2. It extends a receiving buffer size.
+                 3. The defect where "IMSUsers" to have registered on the domain user manager is refused in the receiving to the mailing list name and the alias name in the user of the undefined when defining
+
+v1.10 2000.02.02 1. The reconsideration of the time-out processing with the connection client
+                 2. When it is possible to operate at the thing except local group name "IMSUsers"
+
+v1.11 2000.02.11 1. The debug mode processing modification
+                 2. The processing modification of the receiving counter
+                 3. The lock processing modification of the incoming folder to be receiving
+
+v1.12 2000.02.13 The defect where the transmission doesn't end when transmitting in 1.PostPet
+                 2. When it is possible to acquire the log of the IP address which tried a transmission
+
+v1.13 2000.02.22 1. Experimentally adding the filter function which restrains secondary infection by the partial virus
+                 The defect which had accepted a mail when 2.[Accept Mail For:] was an undefined
+                 3. The defect where the sending and receiving of the identical mail loops forever in James Grover Thurber when allocating more than one domain for the identical IP
+                 4. The correction of the possibility that the timing depends after receiving ending and that there is a hang
+
+v1.14 2000.03.13 1. The defect which doesn't rise in the count when receiving the mail which doesn't have "Subject:" header by the mailing list title and ream turn addition
+                 2. The logic addition by the cancellation key for the shareware
+
+v1.15 2000.03.14 1. The defect which has been locked when doing and the client who does in the connection time-out generates "the log of the IP address which tried a transmission"
+
+v1.16 2000.03.23 1. The cancellation key registration logic addition
+
+v1.17 2000.03.25 1. When it is possible to accept only in the domain which is specific with the specific account in more than one domain use
+
+v1.18 2000.04.16 1. The speed improvement by the response in case of connection beginning
+                 2. The part change by the way of comparing a domain name
+                 3. The part change of the connection time-out processing
+
+1.18  2000.04.17 1. The defect where there is to do the can there is a hang where with the condition by the user checking
+                    (Defect in pre-version modification)
+
+v1.19 2000.05.8 1. The defect which isn't developed right at the time of Ailiases:"abc-*@xxx.co.jp" in MapTo:"*@xxx.co.jp" by the alias extension
+                 2. The defect where there is possibility to have been refused in the receiving when effect.dat file is deleted from the execution folder
+                 3. When the relay control by the mail address and the domain name with effect.dat is possible
+
+1.19a 2000.05.09 1. The defect by which the mechanical name of the inner domain isn't sometimes recognized by the inner domain checking
+                  2. The defect where there is to do the can there is a hang in the receiving procedure where
+
+1.19b 2000.05.11 The defect to be caused by the processing by the domain name by the relay limiting with 1.effect.dat and a hang for there to be
+                   (Defect in modification with v1.19)
+
+v1.20 2000.05.18 The change of the checking order of 1.Local User, Postmaster, Aliase, the Mailing List name
+                  2. The defect which a mail to postmaster isn't transmitted to
+
+v1.21 2000.05.31 When it is possible for 
+                  1.IMS to use non-installation
+                  2. The defect which can not be refused when there is " " ( (blank) ) in the rear of the description "false" of the address refusal in effect.dat
+                  3. The correction which other rather was
+
+v1.22  2000.06.08 1. The defect of the possibility that there is a hang with the condition
+                  2. The closing forgetting of a handle
+
+v1.23  2000.06.17 1. When it is possible to use %HOME% variable to the mailbox folder
+                  2. It changes the default of the work folder into "%SystemRoot%\SYSTEM32\SPA\MAIL".
+                  3. It changes the default of the mailbox folder into "%HOME%\INETMAIL\INBOX".
+                  4. It changes the default of the manager address into "Administrator".
+
+v1.24  2000.06.24 1. The defect which isn't replaced with the default when the setting of a work folder, a mailbox folder, a manager address is a blank
+                  2. The defect where there is possibility that there is a hang when stopping before replying after client connection
+
+v1.25  2000.07.06 1. When it is possible to choose the addition of the "Reply-To:" header in mailing list transmission
+
+v1.26  2000.07.17 1. The defect where there is possibility that there is a hang when it isn't possible to do a reverse pull in the send and receive domain
+                  2. The defect which does a hang to the sending and receiving when specifying "postmaster" with the domain being the mail address which isn't specified
+                  3. The defect where all mails have been refused when setting a mail address to effect.dat in false
+
+v1.27  2000.07.18 Under the 1.NAT environment, and so on, the local IP and the global IP are allocated for the object machine and are the one of the local IP.
+                    The defect where a relay is refused when the local IP connects in the transmission to the network setting with priority under the environment setting which can not do an address draw
+
+v1.28  2000.07.28 1. When more than one one to have specified that is " fixation letter * @ domain " is defined by the object mail address by the alias setting
+                    The defect which has changed by the alias setting which was found out first
+                  2. The defect which can relay a mail outside at account @ domain name " which is unregistered to " in the mail address by the alias setting when specifying "*@ domain name " which was set from the top of spacontrol
+                  3. The change of the way of relaying when specifying "only" by the setting to effect.dat
+
+v1.29  2000.07.28 It changes as more than one piece of "only" specification functions with the setting to 1.effect.dat.
+
+v1.30  2000.08.07 The checking measure by 1.MAPS RSS
+                    It changes as it makes default invalid about the virtual account for the manager who is called "postmaster".
+                  2. The defect which isn't changed right when a mail account is specified by the alias from the address that true was specified by effect.dat
+
+v1.31  2000.08.17 1. The defect which the inquiry of the account data base sometimes fails in when the registered mail account name is 20 letters (the account registration number of the maximum letters)
+                  2. It changes as the removal of the unnecessary title by the re-contribution of the condition which a title was added to by the mailing list.
+                  (Only title specification by the ASCI letter)
+
+v1.32  2000.08.25 1. When it is possible to preserve the data which was contributed to the mailing list to the specification folder
+
+v1.33  2000.09.18 1. Changing a replying code in relay refusal in the part
+
+v1.34  2000.09.25 1. The defect which is refused in the relay when specifying the account of the outside domain by the alias setting
+-------------------------------------------------------------------------
