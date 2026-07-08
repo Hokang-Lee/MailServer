@@ -9,6 +9,7 @@ Releasex32/
 Debugx32/
 
 # Visual Studio generated files
+.vs/
 *.ncb
 *.suo
 *.user

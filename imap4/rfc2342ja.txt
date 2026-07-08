@@ -1,0 +1,547 @@
+
+
+
+
+
+Network Working Group                                         M. Gahrns
+Request for Comments: 2342                                    Microsoft
+Category: Standards Track                                     C. Newman
+                                                               Innosoft
+                                                               May 1998
+
+
+			    IMAP4 名前空間
+
+この覚書の状態
+
+   この文書は、インターネットコミュニティのための、インターネット標準へ
+   の過程のプロトコルについて述べ、改良のための討論と提案を必要としてい
+   る。標準化の状態と、このプロトコルの状態については、"Internet
+   Official Protocol Standards" (STD1) を参照されたし。このメモの配布は
+   制限しない。
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (1998).  All Rights Reserved.
+
+1. 要約
+
+   IMAP4 [RFC-2060]は、サーバのディフォルトの名前空間を定義していない。
+   結果として、2つの共通の名前空間モデルが発展された。
+
+   "個人メールボックス"モデル、この中で提供されているディフォルトの名前
+   空間は、ユーザの個人メールボックスからだけからなる。共有メールボック
+   スにアクセスするためには、ユーザは、他の名前空間に達するために、エス
+   ケープメカニズムを用いなければならない。
+
+   "完全階層"モデル、この中で提供されているディフォルトの名前空間は、ユー
+   ザの個人メールボックスを、他のあらゆるアクセスされるメールボックスと
+   ともに、含まれている。
+
+   これらの2つのモデルは、クライアントの確実なオペレーションへの障害を生
+   み出している。この文書は、クライアントがサーバが、個人メールボックス、
+   他のユーザのメールボックス、共有メールボックスに用いられる名前空間の
+   プリフィックスを発見することを可能にするNAMESPACE 命令を定義する。こ
+   れは、クライアントが、IMAP4 クライアントとサーバをミックスし、マッチ
+   するときに目下のところでは必要である、マニュアルのユーザ・コンフィギュ
+   レーションのほとんどを回避することを可能にする。
+
+2. この文書で用いられる規則
+
+   例の中で、"C:"と"S:"は、それぞれクライアントと、サーバから送られた行
+   を表す。もし、そのような行が新たな "C:"または"S:"ラベルがなくラップさ
+   れたならば、そのラップは編集上の明解さのためで、命令の一部ではない。
+
+
+
+Gahrns & Newman             Standards Track                     [Page 1]
+
+RFC 2342                    IMAP4 Namespace                     May 1998
+
+
+   個人名前空間: サーバがある接続での認証されたユーザの個人の範囲が中に
+   あると考える名前空間。たいていの場合、認証されたユーザだけが、その人
+   の個人名前空間のメールボックスをアクセスする。それは、そのユーザに属
+   する、メールボックスに割り当てられた名前空間の一部分であり、そのユー
+   ザの個人名前空間になければならない。代表的な場合、サーバ上には、唯一
+   の個人名前空間が存在すべきである。
+
+   他のユーザの名前空間: 他のユーザの個人名前空間のメールボックスからな
+   る名前空間。他のユーザの名前空間にアクセスするためには、現在認証され
+   ているユーザが、明白にアクセス権が与えられていなければならない。たと
+   えば、管理者にとって、それらの保護アクセス権をそれらのメールボックス
+   にに与えることは、ありふれたことである。代表的な場合、サーバ上には、
+   唯一の他のユーザの名前空間があるべきである。
+
+   共有名前空間: ユーザの間で共有するつもりで、ユーザの個人名前空間に存
+   在しないメールボックスからなる名前空間。
+
+   サーバが用いる名前空間は、ユーザごとに基準が異なっていてもよい。
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL",
+   "SHALL NOT", "SHOULD",　SHOULD NOT", "RECOMMENDED", "MAY" と、
+   "OPTIONAL" は、[RFC-2119] で述べられているように解釈される。
+
+3. 序論と概要
+
+   クライアントは、送信メッセージの記録を管理したり(例　"Sent Mail")、作
+   成中のメッセージを一時的に保存したり(例 "Drafts")するような目的のメー
+   ルボックスを作成しようとする。これらのクライアントが、入手可能な 
+   IMAP4 サーバの多様性と正確に相互操作するのためには、ユーザはそのサー
+   バで用いられている個人名前空間のプリフィックスを入力しなければならな
+   い。NAMESPACE 命令と用いれば、クライアントは手でのユーザのコンフィギュ
+   レーションなしに、このプリフィクスを見つけられる。
+
+   さらに、ユーザはしばしば、そこに位置するメールボックスを見るために、
+   様々な名前空間のプリフィクスの手での入力を要求される。たとえば、共有
+   メールボックスの名前空間を見るために、#shared プリフィクスの入力を要
+   求されるかもしれない。NAMESPACE 命令は、サーバで利用できる名前空間を
+   自動的に見つけることを可能にする。これは、クライアントが利用可能な名
+   前空間をふさわしいと考えられるどんな方法ででも、ユーザに提供すること
+   を可能にする。たとえば、クライアントは、初めに個人メールボックスだけ
+
+
+
+
+
+
+Gahrns & Newman             Standards Track                     [Page 2]
+
+RFC 2342                    IMAP4 Namespace                     May 1998
+
+
+   を表示することにも選択でき、また、利用できるメールボックスの完全なリ
+   ストを表示し、そして、最初にユーザをその個人名前空間のルートに位置す
+   るようにも選択できる。
+
+   サーバは、サーバがサポートする完全な名前空間のセットのサブセットだけ
+   で NAMESPACE 命令を利用できるようにすることを選択できる。これらの名前
+   空間にアクセスする能力を供給するために、クライアントはユーザが、名前
+   空間のプリフィクスを手で入力する能力を与えるべきである。
+
+4. 必要条件
+
+   この拡張をサポートする MAP4 サーバは、CAPABILITY 応答に、キーワード 
+   NAMESPACE を載せなければならない。
+
+   NAMESPACE 命令は、認証済みと、選択済み状態で有効である。
+
+5. NAMESPACE 命令
+
+   引数: なし
+
+   応答: サーバの個人名前空間、他のユーザの名前空間、サーバが見せようと
+         する共有名前空間のプリフィクスと階層デミリタを含む、タグ無し
+	 NAMESPACE 応答。応答は、利用できない名前空間クラスとしては NIL 
+	 を含んでいるであろう。「名前空間応答拡張」が応答に含まれ ていて
+	 もよい。IETF 標準化にない「名前空間応答拡張」は、"X-"と いうプ
+	 リフィクスがなければならない。
+
+   結果: OK - 命令完了。
+         NO - エラー: 命令を完了できない。
+         BAD - 引数無効
+
+   例 5.1:
+   ===========
+
+      < 単一の個人名前空間をサポートしたサーバ。個人メールボックスには先
+      頭のプリフィクスがなく、"/" が階層デミリタに用いられる。 >
+
+      C: A001 NAMESPACE
+      S: * NAMESPACE (("" "/")) NIL NIL
+      S: A001 OK NAMESPACE command completed
+
+
+
+
+
+Gahrns & Newman             Standards Track                     [Page 3]
+
+RFC 2342                    IMAP4 Namespace                     May 1998
+
+
+   例 5.2:
+   ===========
+
+      < サーバへ匿名ログオンしたユーザ。匿名ユーザとは、個人メールボック
+      スが結びつけられておらず、他のユーザの名前空間へのアクセスを持たな
+      い。共有メールボックスへのアクセスには、プリフィクスを要求されず、
+      階層デミリタは "."。 >
+
+      C: A001 NAMESPACE
+      S: * NAMESPACE NIL NIL (("" "."))
+      S: A001 OK NAMESPACE command completed
+
+   例 5.3:
+   ===========
+
+      < サーバは、個人名前空間と、単一の共有名前空間を持つ。 >
+
+      C: A001 NAMESPACE
+      S: * NAMESPACE (("" "/")) NIL (("Public Folders/" "/"))
+      S: A001 OK NAMESPACE command completed
+
+   例 5.4:
+   ===========
+
+      < サーバは、個人名前空間、他のユーザの名前空間、複数の共有名前空間
+      を含む。それぞれの名前空間で用いられる階層デミリタが異なってもよい
+      ことに注意。 >
+
+      C: A001 NAMESPACE
+      S: * NAMESPACE (("" "/")) (("~" "/")) (("#shared/" "/")
+           ("#public/"   "/")("#ftp/" "/")("#news." "."))
+      S: A001 OK NAMESPACE command completed
+
+   プリフィクス文字列は、自動的に作られる個人メールボックスや、名前空間
+   内で利用できるすべてのメールボックスを LIST することを可能にする。
+
+
+   例 5.5:
+   ===========
+
+      < 個人メールボックスだけをサポートし、それは、個人メールボックスへ
+      は、INBOX をプリフィクスとして到達し、階層デミリタは"." であるサー
+      バ。 >
+
+      C: A001 NAMESPACE
+      S: * NAMESPACE (("INBOX." ".")) NIL  NIL
+      S: A001 OK NAMESPACE command completed
+
+
+
+Gahrns & Newman             Standards Track                     [Page 4]
+
+RFC 2342                    IMAP4 Namespace                     May 1998
+
+
+      < 送信済みアイテムを保存するメールボックスの自動生成 >
+
+      C: A002 CREATE "INBOX.Sent Mail"
+      S: A002 OK CREATE command completed
+
+   一般的には、サーバは、単一の個人名前空間、単一の他のユーザの名前空間
+   をサポートするであろうが、複数あってもよく、クライアントはそれらに対
+   応していなければならない状況も存在する。もしクライアントがあるメール
+   ボックスを作成することが要求されるように設定されているならば、どの個
+   人名前空間にそのメールボックスを作るべきか明確でない状況がありうる。
+   このような事態では、クライアントはユーザにどの名前空間にそのメールボッ
+   クスを作るかを選択させるべきである。
+
+   例 5.6:
+   ===========
+
+      < この例では、サーバは2つの個人名前空間をサポートする。正規の個人
+      名前空間に加えて、そのユーザはMH形式のメール保存でのメールボックス
+      へのアクセスを可能にする追加の個人名前空間を持つ。 >
+
+      < クライアントは、ユーザによって送信されたすべてのメールのコピーを
+      "Sent Mail" と呼ばれるメールボックスの中に保存するように設定されて
+      いる。それだけでなく、メッセージがメールボックスから削除された後、
+      クライアントはそのメッセージを"Deleted Items"と呼ばれるメールボッ
+      クスに移動するように設定されている。 >
+
+      < この例は、どのようにして拡張フラグを、さらに#mh名前空間の状態を
+      表すために渡せられるかを実証していることに注意。 >
+
+      C: A001 NAMESPACE
+      S: * NAMESPACE (("" "/") ("#mh" "/" "X-PARAM" ("FLAG1" "FLAG2")) 
+　　　　NIL  NIL
+      S: A001 OK NAMESPACE command completed
+
+      < ただ1つ送信ずみメールのコピーが保存されることが望まれる。'Send
+      Mail'メールボックスを作成するのにどの個人名前空間を用いるべきかは
+      明確ではない。ユーザは名前空間の選択を促され、唯一の'Sent Mail'メー
+      ルボックスが作成される。 >
+
+      C: A002 CREATE "Sent Mail"
+      S: A002 OK CREATE command completed
+
+      < クライアントはそれぞれの名前空間に1つで、2つの'Deleted Items'メー
+      ルボックスを置いておくように設計されている。 >
+
+      C: A003 CREATE "Delete Items"
+      S: A003 OK CREATE command completed
+
+
+
+Gahrns & Newman             Standards Track                     [Page 5]
+
+RFC 2342                    IMAP4 Namespace                     May 1998
+
+
+      C: A004 CREATE "#mh/Delete Items"
+      S: A004 OK CREATE command completed
+
+   他のユーザの名前空間プリフィクスに続く次の階層は、<ユーザ名>からなる
+   べきで、ここで、<ユーザ名> は、IMAP4 の LOGIN または、AUTHENTICATE 命
+   令に従うユーザ名である。
+
+   クライアントは、他のユーザの名前空間プリフィクスに "%" を加えることに
+   よって、現在の認証されたユーザで利用できる、他のユーザの個人名前空間
+   を見つけるための LIST 命令を作成できる。
+
+   そのような LIST 命令の応答の中で、サーバはその個人メールボックスに、
+   問題のユーザのアクセスを認めていないユーザ名を返すべきではない。
+
+   サーバは、問題のユーザに明白にアクセスを認めているユーザの名前だけを
+   含んでいる LIST 応答を返してもよい。
+
+   代わりに、どのような他のユーザのメールボックスを一覧する前にも、ユー
+   ザ名が他のユーザの名前空間プリフィクスに含まれていることを要求する、
+   そのような　LIST 命令に、NO を返してもよい。
+
+   例 5.7:
+   ===========
+
+      < 現在ログオンしているユーザがアクセス可能な、他のユーザのメールボッ
+      クスの一覧の提供をサポートしないサーバ。 >
+
+      C: A001 NAMESPACE
+      S: * NAMESPACE (("" "/")) (("Other Users/" "/")) NIL
+      S: A001 OK NAMESPACE command completed
+
+      C: A002 LIST "" "Other Users/%"
+      S: * LIST () "/" "Other Users/Mike"
+      S: * LIST () "/" "Other Users/Karen"
+      S: * LIST () "/" "Other Users/Matthew"
+      S: * LIST () "/" "Other Users/Tesa"
+      S: A002 OK LIST command completed
+
+   例 5.8:
+   ===========
+
+      < 現在ログオンしているユーザがアクセスできる他のユーザのメールボッ
+      クスの一覧の提供をサポートしていないサーバ。クライアントが、他のユー
+      ザの名前空間プリフィクスに、他のユーザの名前を含めれば、メールボッ
+      クスは一覧可能。 >
+
+
+
+
+
+Gahrns & Newman             Standards Track                     [Page 6]
+
+RFC 2342                    IMAP4 Namespace                     May 1998
+
+
+      C: A001 NAMESPACE
+      S: * NAMESPACE (("" "/")) (("#Users/" "/")) NIL
+      S: A001 OK NAMESPACE command completed
+
+      < この例では、現在ログオンしているユーザは、ユーザ Mike の個人名前
+      空間にアクセスできるが、サーバは、LIST 応答でこの情報は隠すことを
+      選択している。しかしながら、他のユーザの名前空間プリフィクスに、
+      (ユーザの入力で受け取った)ユーザ名 Mike を加えることによって、クラ
+      イアントは、ユーザ Mike の個人メールボックスの一覧を得ることができ
+      る。 >
+
+      C: A002 LIST "" "#Users/%"
+      S: A002 NO The requested item could not be found.
+
+      C: A003 LIST "" "#Users/Mike/%"
+      S: * LIST () "/" "#Users/Mike/INBOX"
+      S: * LIST () "/" "#Users/Mike/Foo"
+      S: A003 OK LIST command completed.
+
+      プリフィクス文字列は、階層デミリタを含まないかもしれないのだが、な
+      ぜかといえば、いくつかの場合、プリフィクスの一部として必要ないから
+      である。
+
+   例 5.9:
+   ===========
+
+      < '~' と続く <ユーザ名> を他のユーザのメールボックスの前に付けるこ
+      とによって、他のユーザの名前空間にアクセスできるサーバ、ここで、<
+      ユー ザ名>は、IMAP4 の LOGIN あるいは、AUTHENTICATE 命令に従うユー
+      ザ 名。 >
+
+      C: A001 NAMESPACE
+      S: * NAMESPACE (("" "/")) (("~" "/")) NIL
+      S: A001 OK NAMESPACE command completed
+
+      < ユーザ mark のメールボックスの一覧 >
+
+      C: A002 LIST "" "~mark/%"
+      S: * LIST () "/" "~mark/INBOX"
+      S: * LIST () "/" "~mark/foo"
+      S: A002 OK LIST command completed
+
+   "#" という文字を持つ、すべての名前空間には、歴史上の転換が始まってし
+   まった。"#" を含む名前空間は、URL 中では、"#" を %23 として再出するこ
+   とを必要とする IMAP URL [IMAP- URL] に親密でない。そういうことで、サー
+   バ実装者は、代わりに "#" という文字を含まない名前空間プリフィクスを用
+   いることを考慮してもよい。
+
+
+
+
+Gahrns & Newman             Standards Track                     [Page 7]
+
+RFC 2342                    IMAP4 Namespace                     May 1998
+
+
+6. 正式な構文
+
+   次の構文仕様は、[ABNF] で述べられている augmented Backus-Naur Form
+   (BNF)を用いている。
+
+   atom = <atom>
+      ; <atom> は、[RFC-2060]で定義
+
+   Namespace = nil / "(" 1*( "(" string SP  (<"> QUOTED_CHAR <"> /
+       nil) *(Namespace_Response_Extension) ")" ) ")"
+
+   Namespace_Command = "NAMESPACE"
+
+   Namespace_Response_Extension = SP atom SP "(" string *(SP string)
+      ")"
+
+   Namespace_Response = "*" SP "NAMESPACE" SP Namespace SP Namespace SP
+      Namespace
+
+      ; 最初の名前空間は、個人名前空間
+      ; 2番目の名前空間は、他の人の名前空間
+      ; 3番目の名前空間は、共有名前空間
+
+   nil = <nil>
+      ; <nil> は、 [RFC-2060] で定義
+
+   QUOTED_CHAR = <QUOTED_CHAR>
+      ; <QUOTED_CHAR>は [RFC-2060] で定義
+
+   string = <string>
+      ; <string> は、 [RFC-2060] で定義
+      : 名前空間プリフィクスはメールボックスのためでIMAP4規則に従い、あらゆる
+      : NAMESPACE応答の中での国際文字列は[RFC-2060]で述べられている修正UTF-7
+      : 形式でなければならないことに注意。
+
+7. セキュリティ上の考慮
+
+   他のユーザの名前空間プリフィクスを含む LIST 命令への応答には、サーバ
+   は、現在の認証されたユーザに、個人のメールボックスのリストアクセスを
+   認めていないユーザを一覧にすべきでない。そのような一覧を与えることは、
+   そのサーバに位置する人の機密の情報を漏らす可能性、または、アタックす
+   るユーザの一覧の出発点を与える可能性によって、セキュリティを危うくす
+   る。
+
+
+
+
+
+
+Gahrns & Newman             Standards Track                     [Page 8]
+
+RFC 2342                    IMAP4 Namespace                     May 1998
+
+
+8. 参照
+
+   [RFC-2060], Crispin, M., "Internet Message Access Protocol Version
+   4rev1", RFC 2060, December 1996.
+
+   [RFC-2119], Bradner, S., "Key words for use in RFCs to Indicate
+   Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [ABNF] Crocker, D., Editor, and P. Overell, "Augmented BNF for Syntax
+   Specifications: ABNF", RFC 2234, November 1997.
+
+   [IMAP-URL], Newman, C., "IMAP URL Scheme", RFC 2192, September 1997.
+
+9. 謝辞
+
+   多くの人々が、IMAP メーリングリスト上での IMAP 名前空間についての議論
+   に参加した。特に著者は、Mark Crispin の個人名前空間関連と、他のユーザ
+   の個人名前空間へのアクセスの多くのコンセプト、Stave Hole の2つの名前
+   空間モデルの要約、John Myers と Jack De Winterの先の、標準化個人名前
+   空間の定義のしようとした努力での作業、Larry Osterman のこの文書での批
+   評と共同作業に感謝したい。
+
+11. 著者のアドレス
+
+   Mike Gahrns
+   Microsoft
+   One Microsoft Way
+   Redmond, WA, 98072, USA
+   Phone: (425) 936-9833
+   EMail: mikega@microsoft.com
+
+   Chris Newman
+   Innosoft International, Inc.
+   1050 East Garvey Ave. South
+   West Covina, CA, 91790, USA
+   EMail: chris.newman@innosoft.com
+
+   Chris Newman
+   Innosoft International, Inc.
+   1050 East Garvey Ave. South
+   West Covina, CA, 91790, USA
+   EMail: chris.newman@innosoft.com
+
+
+
+
+
+
+
+
+
+
+Gahrns & Newman             Standards Track                     [Page 9]
+
+RFC 2342                    IMAP4 Namespace                     May 1998
+
+
+12.  Full Copyright Statement
+
+   Copyright (C) The Internet Society (1998).  All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works.  However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assigns.
+
+   This document and the information contained herein is provided on an
+   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Gahrns & Newman             Standards Track                    [Page 10]
+

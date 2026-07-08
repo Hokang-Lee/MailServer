@@ -24,7 +24,7 @@ if not exist build\obj mkdir build\obj
 if not exist build\bin mkdir build\bin
 
 set "COMMON_DEFS=/DWIN64 /DWIN32 /D_CONSOLE /D_MT /DWINDOWS /DMULTI_ML /DBTHREAD /DHOME_VERSION /DWIN32_LEAN_AND_MEAN /D_CRT_SECURE_NO_WARNINGS"
-set "COMMON_INC=/I. /I..\compat /FIobjbase.h"
+set "COMMON_INC=/I. /I..\smtpds\compat /FIobjbase.h"
 set "COMMON_CL=/nologo /c /W3 %COMMON_DEFS% %COMMON_INC%"
 
 cl %COMMON_CL% /Fobuild\obj\auth.obj auth.c || exit /b 1

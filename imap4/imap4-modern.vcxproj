@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="DebugNoSSL|x64">
+      <Configuration>DebugNoSSL</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseNoSSL|x64">
+      <Configuration>ReleaseNoSSL</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{8e8ec9d5-92e0-465e-b3ef-0edcde201ef8}</ProjectGuid>
+    <RootNamespace>imap4modern</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoSSL|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseNoSSL|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)$(Configuration)\obj\</IntDir>
+    <TargetName>Epstimap4s</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoSSL|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN64;_DEBUG;_CONSOLE;_MT;WINDOWS;MULTI_ML;BTHREAD;WIN32_LEAN_AND_MEAN;NO_LDAP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <CompileAs>CompileAsC</CompileAs>
+      <AdditionalOptions>/wd4996 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>..\rel64;..\..\rel64;..\..\..\rel64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wship6.lib;odbc32.lib;odbccp32.lib;wsock32.lib;netapi32.lib;ws2_32.lib;wldap32.lib;res\imap4s.RES;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <StackReserveSize>2097152</StackReserveSize>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseNoSSL|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <PreprocessorDefinitions>WIN64;NDEBUG;_CONSOLE;_MT;WINDOWS;MULTI_ML;BTHREAD;WIN32_LEAN_AND_MEAN;NO_LDAP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <CompileAs>CompileAsC</CompileAs>
+      <AdditionalOptions>/wd4996 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>..\rel64;..\..\rel64;..\..\..\rel64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wship6.lib;odbc32.lib;odbccp32.lib;wsock32.lib;netapi32.lib;ws2_32.lib;wldap32.lib;res\imap4s.RES;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <StackReserveSize>2097152</StackReserveSize>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="append.c" />
+    <ClCompile Include="authenticate.c" />
+    <ClCompile Include="bad.c" />
+    <ClCompile Include="base64.c" />
+    <ClCompile Include="capability.c" />
+    <ClCompile Include="check.c" />
+    <ClCompile Include="close.c" />
+    <ClCompile Include="copy.c" />
+    <ClCompile Include="create.c" />
+    <ClCompile Include="delete.c" />
+    <ClCompile Include="examine.c" />
+    <ClCompile Include="expunge.c" />
+    <ClCompile Include="fetch.c" />
+    <ClCompile Include="getmetadata.c" />
+    <ClCompile Include="id.c" />
+    <ClCompile Include="idle.c" />
+    <ClCompile Include="imap4.c" />
+    <ClCompile Include="imap4file.c" />
+    <ClCompile Include="ldap.c" />
+    <ClCompile Include="list.c" />
+    <ClCompile Include="login.c" />
+    <ClCompile Include="logout.c" />
+    <ClCompile Include="lsub.c" />
+    <ClCompile Include="md5c.c" />
+    <ClCompile Include="namespace.c" />
+    <ClCompile Include="noop.c" />
+    <ClCompile Include="profile.c" />
+    <ClCompile Include="recover.c" />
+    <ClCompile Include="Reg2File.c" />
+    <ClCompile Include="regist.c" />
+    <ClCompile Include="rename.c" />
+    <ClCompile Include="search.c" />
+    <ClCompile Include="select.c" />
+    <ClCompile Include="service.c" />
+    <ClCompile Include="setmetadata.c" />
+    <ClCompile Include="socket.c" />
+    <ClCompile Include="status.c" />
+    <ClCompile Include="stls.c" />
+    <ClCompile Include="store.c" />
+    <ClCompile Include="subscribe.c" />
+    <ClCompile Include="threads.c" />
+    <ClCompile Include="uid.c" />
+    <ClCompile Include="unsubscribe.c" />
+    <ClCompile Include="user_manager.c" />
+    <ClCompile Include="userlist.c" />
+    <ClCompile Include="utf8.cpp">
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="codeconv.h" />
+    <ClInclude Include="codepage.h" />
+    <ClInclude Include="global.h" />
+    <ClInclude Include="imap4.h" />
+    <ClInclude Include="imap4type.h" />
+    <ClInclude Include="md5c.h" />
+    <ClInclude Include="profile.h" />
+    <ClInclude Include="service.h" />
+    <ClInclude Include="utf8.h" />
+    <ClInclude Include="version.h" />
+    <ClInclude Include="res\imap4s.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\imap4s.RES" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

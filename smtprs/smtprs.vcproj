@@ -1088,7 +1088,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="odbc32.lib odbccp32.lib wsock32.lib netapi32.lib ws2_32.lib ../rel64/wship6.lib ../rel64/libcrypto.lib ../rel64/libssl.lib wldap32.lib Dnsapi.lib"
+				AdditionalDependencies="odbc32.lib odbccp32.lib wsock32.lib netapi32.lib ws2_32.lib ../../rel64/wship6.lib ../../rel64/libcrypto.lib ../../rel64/libssl.lib wldap32.lib Dnsapi.lib"
 				OutputFile="Releasex64/Epstrs.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"

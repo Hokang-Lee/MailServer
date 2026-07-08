@@ -60,8 +60,8 @@ link /nologo /subsystem:console /machine:x64 /out:build\bin\spads-home-x64.exe ^
   build\obj\userlist.obj ^
   build\obj\legacy_msvc.obj ^
   res\smtpds.RES ^
-  ..\rel64\resolv.lib ^
-  ..\rel64\wship6.lib ^
+  ..\..\rel64\resolv.lib ^
+  ..\..\rel64\wship6.lib ^
   kernel32.lib user32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib ^
   odbc32.lib odbccp32.lib wsock32.lib netapi32.lib ws2_32.lib wldap32.lib ^
   dnsapi.lib activeds.lib adsiid.lib

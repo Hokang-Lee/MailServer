@@ -728,7 +728,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../rel64/resolv.lib ../rel64/wship6.lib ../rel64/libeay32.lib ../rel64/ssleay32.lib odbc32.lib odbccp32.lib wsock32.lib netapi32.lib ws2_32.lib wldap32.lib"
+				AdditionalDependencies="../../rel64/resolv.lib ../../rel64/wship6.lib ../../rel64/libeay32.lib ../../rel64/ssleay32.lib odbc32.lib odbccp32.lib wsock32.lib netapi32.lib ws2_32.lib wldap32.lib"
 				OutputFile="Releasex32/spads.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
@@ -1102,7 +1102,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../rel64/resolv.lib ../rel64/wship6.lib ../rel64/libcrypto.lib ../rel64/libssl.lib odbc32.lib odbccp32.lib wsock32.lib netapi32.lib ws2_32.lib wldap32.lib"
+				AdditionalDependencies="../../rel64/resolv.lib ../../rel64/wship6.lib ../../rel64/libcrypto.lib ../../rel64/libssl.lib odbc32.lib odbccp32.lib wsock32.lib netapi32.lib ws2_32.lib wldap32.lib"
 				OutputFile="Releasex64/Epstds.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
